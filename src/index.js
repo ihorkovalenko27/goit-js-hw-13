@@ -3,6 +3,8 @@ import Notiflix from "notiflix";
 import cardItems from './templates/cards-item.hbs';
 import ImageApiService from './fetch-images.js';
 
+
+
 const imageApiService = new ImageApiService();
 
 const refs = {
@@ -10,6 +12,7 @@ const refs = {
     cardList: document.querySelector('.gallery'),
     loadMoreButton: document.querySelector('.load-more'),
     photoCardList: document.querySelectorAll('.gallery'),
+    imageList: document.querySelector('.photo-card')
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -34,7 +37,7 @@ async function onSearch(e){
         }
         if(getCards.totalHits > 0){
         createCards(getCards.hits)
-        Notiflix.Notify.info(`WOW! We founded ${getCards.totalHits} matches. AWESOME!`);
+        Notiflix.Notify.info(`Hooray! We found ${getCards.totalHits} images.`);
         refs.loadMoreButton.classList.remove('visually-hidden');
         };
     } catch (error) {

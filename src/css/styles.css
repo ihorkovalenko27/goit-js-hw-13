@@ -29,6 +29,15 @@ img {
     text-align: center;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:visited {
+  color: black;
+}
+ 
 .input {
     margin-bottom: 20px;
     width: 15%;
