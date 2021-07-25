@@ -11,8 +11,6 @@ const refs = {
     searchForm: document.querySelector('.search-form'),
     cardList: document.querySelector('.gallery'),
     loadMoreButton: document.querySelector('.load-more'),
-    photoCardList: document.querySelectorAll('.gallery'),
-    imageList: document.querySelector('.photo-card')
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -49,7 +47,14 @@ async function onLoadMore() {
     try {
         const getCards = await imageApiService.getImages();
         createCards(getCards.hits)
-        if(refs.photoCardList.length === getCards.totalHits){
+        const { height: cardHeight } = document
+        .querySelector('.gallery')
+        .firstElementChild.getBoundingClientRect();
+        window.scrollBy({
+        top: cardHeight * 2.9,
+        behavior: 'smooth',
+        });
+        if(refs.cardList.children.length === getCards.totalHits){
             getErrorMessage()
         }
     
