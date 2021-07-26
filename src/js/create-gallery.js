@@ -39,6 +39,7 @@ async function onSearch(e){
            showSearchMessage(getCards.totalHits);
            setVisuallyHidden(false);
         };
+
     } catch (error) {
        console.log(error);
     }
