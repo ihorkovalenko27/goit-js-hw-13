@@ -2,7 +2,9 @@
 import Notiflix from "notiflix";
 import cardItems from '../templates/cards-item.hbs';
 import ImageApiService from './fetch-images.js';
+import SimpleLightbox from "simplelightbox";
 
+const lightbox = new SimpleLightbox('.gallery a');
 const imageApiService = new ImageApiService();
 
 const refs = {
@@ -28,6 +30,7 @@ async function onSearch(e){
     updateCardList('');
     setVisuallyHidden(true);
     imageApiService.resetPage();
+    
 
     try {
         const getCards = await imageApiService.getImages();
@@ -38,6 +41,7 @@ async function onSearch(e){
            createCards(getCards.hits)
            showSearchMessage(getCards.totalHits);
            setVisuallyHidden(false);
+           lightbox.refresh();
         };
 
     } catch (error) {
@@ -49,6 +53,7 @@ async function onLoadMore() {
     try {
         const getCards = await imageApiService.getImages();
         createCards(getCards.hits)
+        lightbox.refresh();
 
         const { height: cardHeight } = refs.cardList
         .firstElementChild.getBoundingClientRect();
